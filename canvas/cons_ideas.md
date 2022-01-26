@@ -53,6 +53,20 @@
 
 ## Ideas
 
-1. complexities. time:, memory:.
-2. complexities. time:, memory:.
+complexities. time:, memory:.
+
+1. convert problem to a simplified version. For example, 2D -> 1D.
+2. writing down a few examples in order to find some pattern.
+3. think of suitable data structure.
+4. think about related problems that you know.
+
+## Test Cases
+
+1. edge cases.
+2. no solution cases.
+3. non-trivial functional tests.
+4. randomized tests.
+5. load test.
+
+non-trival functional + edge + no solution
 
