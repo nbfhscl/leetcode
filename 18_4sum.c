@@ -47,11 +47,14 @@ void n_sum_dfs(int d, int *p, int n, int* a, int l, int r, int v, node *t) {
                 tt->next = t->next;
                 t->next = tt;
                 t = tt;
+                /* todo: check index before value */
                 for (rr--; a[rr] == a[rr+1] && ll < rr; rr--);
                 for (ll++; a[ll] == a[ll-1] && ll < rr; ll++);
             } else if (v < a[ll] + a[rr]) {
+                /* todo: check index before value */
                 for (rr--; a[rr] == a[rr+1] && ll < rr; rr--);
             } else {
+                /* todo: check index before value */
                 for (ll++; a[ll] == a[ll-1] && ll < rr; ll++);
             }
         }

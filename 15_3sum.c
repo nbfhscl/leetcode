@@ -59,6 +59,7 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
         if (i > 0 && nums[i] == nums[i-1]) continue;
         for (int l = i+1, r = numsSize-1; l < r; l++) {
             if (l > i+1 && nums[l] == nums[l-1]) continue;
+                /* todo: check index before value */
             while ( (nums[i]+nums[l]) > -nums[r] && l < r ) r--;
             if (l >= r) break;
             if ( (nums[i]+nums[l]) == -nums[r] ) {
