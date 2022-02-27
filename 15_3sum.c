@@ -34,7 +34,7 @@ void quicksort(int *a, int l, int r) {
             a[i] = a[j];
         }
         a[i] = v;
-        quicksort(a, 0, j-1);
+        quicksort(a, l, j-1);
         quicksort(a, j+1, r);
     }
 }
