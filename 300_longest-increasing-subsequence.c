@@ -1,7 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
+/* 
+ * medium(中等)
+ * dynamic programming(动态规划)
+ * binary search(二分查找)
+ *
  * Constrains
  * 1. numsSize? [1, 2500]
  * 2. nums[i]? [-10000, 10000]

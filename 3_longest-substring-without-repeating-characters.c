@@ -3,6 +3,10 @@
 #include <stdio.h>
 
 /*
+ * Medium(中等)
+ * hashmap(哈希表)
+ * double pointer(双指针)
+ *
  * Constrains
  * 1. sSize?
  * 2. retSize?
@@ -14,6 +18,8 @@
  *      then len[i+j] = len[i] - j, 0 < j < e[i]-i
  *      Time O(n), Memory O(m)
  *
+ * Summary:
+ * the simplest hashmap is an array.
  *      
  */
 
