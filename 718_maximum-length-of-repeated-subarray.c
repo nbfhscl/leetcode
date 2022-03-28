@@ -4,6 +4,13 @@
 #include <math.h>
 
 /*
+ * Medium(中等)
+ * brute force(暴力)
+ * dynamic programming(动态规划)
+ * siliding window(滑动窗口)
+ * binary search(二分查找)
+ * hashmap(哈希表)
+ *
  * Constrains
  * 1. numsSize? [1,10000]
  * 2. nums[i]? [0,100]
