@@ -28,10 +28,8 @@
 
 long qPow(long x, long n, long mod) {
     long ret = 1;
-    while (n) {
-        if (n & 1) {
-            ret = ret * x % mod;
-        }
+    for (;n;) {
+        if (n & 1) ret = ret * x % mod;
         x = x * x % mod;
         n >>= 1;
     }
@@ -65,11 +63,16 @@ int exist(int* a, int sizeA, int* b, int sizeB, int len) {
     memset(mapA, 0, sizeof(Map) * (sizeMapA+1));
     long hash=0;
     for (int i=0; i<len; i++) {
+        // a*b*b % mod == (a*b%mod)*b%mod
+        // 3*6*6 % 5 = 3
+        // (3*6%5)*6%5 = 3
         hash = (hash*base + a[i]) % mod;
     }
     store(mapA, sizeMapA, hash);
+    // calculate base^(len-1) % mod using quick power method
     long mult = qPow(base, len-1, mod);
     for (int i=len; i<sizeA; i++) {
+        // hashSum - hash[i-len] could < 0, so as to plus a mod
         hash = ((hash - a[i-len]*mult%mod + mod)%mod*base + a[i])%mod;
         store(mapA, sizeMapA, hash);
     }
