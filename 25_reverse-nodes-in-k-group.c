@@ -2,8 +2,18 @@
 
 /**
  * 困难(hard)
- * 链表(LinkedList)
+ * 链表(linked list)
+ * 递归(recursion)
+ * 哨兵(sentinel)
  *
+ * Constrains
+ * Ideas and Complexities
+ * 1. move 1th to nth, 2th to (n-1)th.
+ *      Time O(n!), Memory O(1)
+ * 2. reverse the linked list
+ *      Time O(n), Memory O(1)
+ *   1. recursion
+ *   2. iteration
  */
 
 /**
@@ -92,6 +102,23 @@ struct ListNode* reverseKGroup_reverse_iter(struct ListNode* head, int k){
         ll->next = l;
         ll = mm;
     }
+}
+
+struct ListNode* reverseKGroup_recursion(struct ListNode* head, int k){
+    struct ListNode *t, *l, *m, *r, *h;
+    m = head, t = m;
+    int cnt = k;
+    for (;cnt>0 && t != NULL;cnt--) t = t->next;
+    if (cnt>0) return m;
+    h = m;
+    for (;m != t;) {
+        r = m->next;
+        m->next = l;
+        l = m;
+        m = r;
+    }
+    h->next = reverseKGroup_recursion(m, k);
+    return l;
 }
 
 struct ListNode* reverseKGroup(struct ListNode* head, int k){
