@@ -93,7 +93,7 @@ int comp_minimal_heap(const void* a, const void* b) {
     return *(int*)b - *(int*)a;
 }
 void heap_up(int* nums, int i, int (* compar)(const void*, const void*)) {
-    if (i == 0) return;
+    if (i == -1) return;
     int v = nums[i];
     for (; (i-1)>>1 >= 0 && compar(&nums[(i-1)>>1], &v) < 0;) {
         nums[i] = nums[(i-1)>>1];

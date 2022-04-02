@@ -27,62 +27,40 @@ struct ListNode {
 };
 
 
-// 1 -> 2 -> 3 -> 4 -> 5 -> NULL
-//                          ↑
-// 1 -> 2 -> 3 -> 4 -> 5 -> NULL
-//                     ↑
-// 1 -> 2 -> 3 NULL <- 4 <- 5
-//                     ↑
-// 1 -> 2 -> 3 -> 4 <- 5
-//           ↑
-// 1 -> 2 NULL <- 3 <- 4 <- 5
-//                ↑
-// 1 -> 2 -> 3 <- 4 <- 5
-//      ↑
-// 1 NULL <- 2 <- 3 <- 4 <- 5
-//           ↑
-// 1 -> 2 <- 3 <- 4 <- 5
-// ↑
-// NULL <- 1 <- 2 <- 3 <- 4 <- 5
-//         ↑
+// 1 -> 2 -> 3 -> 4 -> 5
+// 1 -> 2 -> 3    4 <- 5
+//                ↓
+//               NULL
+// NULL 1 <- 2 <- 3 <- 4 <- 5
 struct ListNode* reverseList_rc(struct ListNode* head){
-    if (head == NULL) return head;
-    struct ListNode* newHead = reverseList_rc(head->next);
     if (head->next == NULL) return head;
+    struct ListNode *ret = reverseList_rc(head->next);
     head->next->next = head;
     head->next = NULL;
-    return newHead;
+    return ret;
 }
 
-
+/**
+ *       1 -> 2 -> 3 -> NULL;
+ *  l    m    r
+ *
+ *    r = m.next
+ *  m.next = l
+ *    l = m
+ *  m = r
+ *          
+ */
 struct ListNode* reverseList_2(struct ListNode* head){
-    struct ListNode *prev = NULL;
-    struct ListNode *curr = head;
-    struct ListNode *next;
-    for(;curr != NULL;) {
-        next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
+    struct ListNode *l = NULL;
+    struct ListNode *m = head;
+    struct ListNode *r;
+    for(;m != NULL;) {
+        r = m->next;
+        m->next = l;
+        l = m;
+        m = r;
     }
-    return prev;
-}
-
-struct ListNode* reverseList(struct ListNode* head){
-    if (head == NULL) return head;
-    if (head->next == NULL) return head;
-    struct ListNode *l=head;
-    head = head->next;
-    l->next = NULL;
-    struct ListNode *r = head->next;
-    head->next = l;
-    for (;r != NULL;) {
-        l = head;
-        head = r;
-        r = head->next;
-        head->next = l;
-    }
-    return head;
+    return l;
 }
 
 int main() {
@@ -94,7 +72,7 @@ int main() {
     listNode[3] = (struct ListNode){4, listNode+4};
     listNode[4] = (struct ListNode){5, listNode+5};
     listNode[4].next = NULL;
-    struct ListNode* ret = reverseList(listNode);
+    struct ListNode* ret = reverseList_rc(listNode);
     for(;ret != NULL;) {
         printf("%d ", ret->val);
         ret = ret->next;
