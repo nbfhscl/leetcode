@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 /**
+ * review quicksort
+ *
  * 中等(medium)
  * 数组(array)
  * 快排(quicksort)
@@ -19,17 +21,21 @@
 })
 
 void quicksort(int* nums, int l, int r) {
+    // [5,25] works about the same
     if (r-l < 15) {
         for (int i=l+1;i<=r;i++) {
             int j=i, v=nums[i];
             for (; j>0 && nums[j-1]>v;j--) nums[j] = nums[j-1];
             nums[j]=v;
         }
+        // dont forget to return here
         return;
     }
     int mid = l + ((r-l)>>1);
+    // make nums[mid] the largest
     if (nums[mid] < nums[l]) SWAP(nums[mid], nums[l]);
     if (nums[mid] < nums[r]) SWAP(nums[mid], nums[r]);
+    // make nums[r] the medium
     if (nums[r] < nums[l]) SWAP(nums[r], nums[l]);
     int ll = l, rr = r, v = nums[rr];
     for (;ll<rr;) {
@@ -38,6 +44,7 @@ void quicksort(int* nums, int l, int r) {
         for (;ll<rr && nums[rr] >= v;) rr--;
         nums[ll] = nums[rr];
     }
+    // ll==rr
     nums[ll] = v;
     quicksort(nums, l, ll-1);
     quicksort(nums, ll+1, r);
@@ -53,6 +60,8 @@ void quicksort_stack(int* nums, int l, int r) {
                 nums[j]=v;
             }
             if (si<=0) return;
+            // pop from stack instead of return
+            // pop using --si rather than si--
             l = stack[--si], r = stack[--si];
             continue;
         }
@@ -68,7 +77,13 @@ void quicksort_stack(int* nums, int l, int r) {
             nums[ll] = nums[rr];
         }
         nums[ll] = v;
+        // end-recursion-removal and the
+        // policy of processing the smaller of the two subfiles
+        // first ensures the room needed for stack to be as small
+        // as possible(logn). processing the larger part first will need
+        // more rooms for stack typically.
         if (ll-l > r-ll) {
+            // push using si++ rather than ++si
             stack[si++] = ll-1, stack[si++] = l, l=ll+1;
         } else {
             stack[si++] = r, stack[si++] = ll+1, r=ll-1;
