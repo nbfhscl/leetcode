@@ -2,6 +2,9 @@
 #include <stdio.h>
 
 /*
+ * review reverse linkedlist
+ *
+ *
  * Constrains
  * 1. ListNodeSize? [0,5000]
  * 2. ListNode[i]? [-5000,5000]
