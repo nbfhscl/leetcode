@@ -34,8 +34,7 @@ int findKthQuicksort(int* nums, int l, int r, int k) {
     if (nums[l] < nums[r]) SWAP(nums[l], nums[r]);
     if (nums[l] < nums[mid]) SWAP(nums[l], nums[mid]);
     if (nums[r] < nums[mid]) SWAP(nums[r], nums[mid]);
-    int ll=l, rr=r;
-    int v=nums[rr];
+    int ll=l, rr=r, v=nums[rr];
     for (;ll<rr;) {
         for (;ll<rr && nums[ll]>=v;) ll++;
         nums[rr] = nums[ll];

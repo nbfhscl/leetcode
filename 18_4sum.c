@@ -67,18 +67,24 @@ void n_sum_dfs(int d, int *p, int n, int* a, int l, int r, int v, node *t) {
             int dd, j;
             for (vv=v, dd=d, j=i; dd>0; dd--, j++) {
                 vv -= a[j];
+                // sum is too large while num still positive.
+                // plus a[j+1] will only make sum larger.
                 if ( a[j] >= 0 && vv < 0 ) {
                     return;
                 }
+                // sum of minimum dd nums is too large
                 if ( dd == 1 && vv < 0 ) {
                     return;
                 }
             }
             for (vv=v, dd=d, j=r; dd>0; dd--, j--) {
                 vv -= a[j];
+                // sum is too small while num already negative.
+                // plus a[j-1] will only make sum smaller.
                 if ( a[j] <= 0 && vv > 0 ) {
                     return;
                 }
+                // sum of maximum dd nums is too small
                 if ( dd == 1 && vv > 0 ) {
                     return;
                 }
@@ -88,7 +94,6 @@ void n_sum_dfs(int d, int *p, int n, int* a, int l, int r, int v, node *t) {
         n_sum_dfs(d-1, p, n, a, i+1, r, v-a[i], t);
     }
 }
-
 int** nSum(int n, int* nums, int numsSize, int target, int* returnSize, int** returnColumnSizes){
     qsort(nums, numsSize, sizeof(int), comp);
     node *h, *z, *t;
