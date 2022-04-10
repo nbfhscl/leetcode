@@ -52,44 +52,6 @@ int findKthLargest_quicksort(int* nums, int numsSize, int k){
     return findKthQuicksort(nums, 0, numsSize-1, k-1);
 }
 
-/*
- *          0
- *     1         2
- *  3     4   5     6
- * 2i+1 2i+2
- */
-void maximum_heap_up(int* nums, int i) {
-    if (i == 0) return;
-    int v = nums[i];
-    for (; (i-1)>>1 >= 0 && nums[(i-1)>>1] < v;) {
-        nums[i] = nums[(i-1)>>1];
-        i = (i-1)>>1;
-    }
-    nums[i] = v;
-}
-void maximum_heap_down(int* nums, int numsSize) {
-    int v = nums[0];
-    int i=0, k;
-    for (; i<=(numsSize-1)>>1; ) {
-        k = 2*i+1;
-        if (k > numsSize-1) break; // 从0开始的数组需要判断这个边界条件
-        if (k < numsSize-1 && nums[k+1] > nums[k]) k++;
-        if (v >= nums[k]) break;
-        nums[i] = nums[k], i = k;
-    }
-    nums[i] = v;
-}
-int findKthLargest_maximum_heap(int* nums, int numsSize, int k) {
-    for (int i=1; i<numsSize; i++) {
-        maximum_heap_up(nums, i);
-    }
-    for (int i=1; i<k; i++) {
-        nums[0] = nums[numsSize-i];
-        maximum_heap_down(nums, numsSize-i);
-    }
-    return nums[0];
-}
-
 int comp_minimal_heap(const void* a, const void* b) {
     return *(int*)a - *(int*)b;
 }
@@ -122,9 +84,29 @@ int findKthLargest_minimum_heap(int* nums, int numsSize, int k){
     return nums[0];
 }
 
+/*
+ *          0
+ *     1         2
+ *  3     4   5     6
+ * 2i+1 2i+2
+ */
+int comp_maximum_heap(const void* a, const void* b) {
+    return *(int*)b - *(int*)a;
+}
+int findKthLargest_maximum_heap(int* nums, int numsSize, int k) {
+    for (int i=1; i<numsSize; i++) {
+        heap_up(nums, i, comp_maximum_heap);
+    }
+    for (int i=1; i<k; i++) {
+        nums[0] = nums[numsSize-i];
+        heap_down(nums, numsSize-i, comp_maximum_heap);
+    }
+    return nums[0];
+}
+
 int findKthLargest(int* nums, int numsSize, int k){
-    return findKthLargest_minimum_heap(nums, numsSize, k);
-    /* return findKthLargest_maximum_heap(nums, numsSize, k); */
+    /* return findKthLargest_minimum_heap(nums, numsSize, k); */
+    return findKthLargest_maximum_heap(nums, numsSize, k);
     /* return findKthLargest_quicksort(nums, numsSize, k); */
 }
 
