@@ -2,6 +2,12 @@
 #include <stdio.h>
 
 /*
+ * review LinkedHashMap LRU
+ *
+ * 中等(Medium)
+ * 哈希表(HashMap)
+ * 链表(LinkedList)
+ *
  * 实现过程中出现几个低级错误
  * 1. malloc没有memset，用到了index=0的判断必须初始化内存
  * 2. hashmap的size和cap的关系, size = 2*cap, 分配空间=size+1
