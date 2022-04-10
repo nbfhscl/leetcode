@@ -3,11 +3,13 @@
 #include <stdlib.h>
 
 /**
+ * review heap
+ *
  * medium(中等)
  * quicksort(快排)
  * maximum_heap(最大堆)
  * minimum_heap(最小堆)
- * heapsort(堆排序)
+ * heap(堆排序)
  *
  * Constrains
  * 1. numsSize? k? [1, 10000]
@@ -89,28 +91,24 @@ int findKthLargest_maximum_heap(int* nums, int numsSize, int k) {
 }
 
 int comp_minimal_heap(const void* a, const void* b) {
-    return *(int*)b - *(int*)a;
+    return *(int*)a - *(int*)b;
 }
 void heap_up(int* nums, int i, int (* compar)(const void*, const void*)) {
-    if (i == -1) return;
-    int v = nums[i];
-    for (; (i-1)>>1 >= 0 && compar(&nums[(i-1)>>1], &v) < 0;) {
-        nums[i] = nums[(i-1)>>1];
-        i = (i-1)>>1;
+    int j=i, v=nums[j], k;
+    for (; (k=(j-1)>>1) >= 0;) {
+        if (compar(&nums[k], &v) <= 0) break;
+        nums[j] = nums[k], j=k;
     }
-    nums[i] = v;
+    nums[j] = v;
 }
 void heap_down(int* nums, int numsSize, int (* compar)(const void*, const void*)) {
-    int v = nums[0];
-    int i=0, k;
-    for (; i<=(numsSize-1)>>1; ) {
-        k = 2*i+1;
-        if (k > numsSize-1) break; // 从0开始的数组需要判断这个边界条件
-        if (k < numsSize-1 && compar(&nums[k+1], &nums[k]) > 0) k++;
-        if (compar(&v, &nums[k]) >= 0) break;
-        nums[i] = nums[k], i = k;
+    int j=0, v=nums[j], k;
+    for (; (k=2*j+1)<numsSize; ) {
+        if (k<numsSize-1 && compar(&nums[k], &nums[k+1])>0) k++;
+        if (compar(&nums[k], &v) >= 0) break;
+        nums[j] = nums[k], j = k;
     }
-    nums[i] = v;
+    nums[j] = v;
 }
 int findKthLargest_minimum_heap(int* nums, int numsSize, int k){
     for (int i=1; i<k; i++) {
@@ -125,8 +123,8 @@ int findKthLargest_minimum_heap(int* nums, int numsSize, int k){
 }
 
 int findKthLargest(int* nums, int numsSize, int k){
-    /* return findKthLargest_minimum_heap(nums, numsSize, k); */
-    return findKthLargest_maximum_heap(nums, numsSize, k);
+    return findKthLargest_minimum_heap(nums, numsSize, k);
+    /* return findKthLargest_maximum_heap(nums, numsSize, k); */
     /* return findKthLargest_quicksort(nums, numsSize, k); */
 }
 
