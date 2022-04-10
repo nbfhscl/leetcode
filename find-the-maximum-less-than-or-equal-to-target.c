@@ -3,15 +3,12 @@
 #include <assert.h>
 
 /*
+ * review binarysearch
  * 左边取右边，右边取左边
  * 左边左边等，右边右边等
  * 有等也有等，没等也没等
  */
 
-/*
- * 左边取右边
- * 左边左边等，有等也有等
- */
 int find_the_maximum_less_than_or_equal_to_target(int* a, int size, int target) {
     int l=0, r=size-1, m, v;
     for (;l<r;) {

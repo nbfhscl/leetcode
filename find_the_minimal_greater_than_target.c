@@ -1,15 +1,12 @@
 #include <assert.h>
 
 /*
+ * review binarysearch
  * 左边取右边，右边取左边
  * 左边左边等，右边右边等
  * 有等也有等，没等也没等
  */
 
-/*
- * 右边取左边
- * 右边右边等，没等也没等
- */
 int find_the_minimal_greater_than_target(int* a, int size, int target) {
     int l=0, r=size-1, m;
     for (;l<r;) {

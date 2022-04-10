@@ -1,6 +1,7 @@
 
 
 /*
+ * review dp and divide and conquer
  * 中等(medium)
  * 数组(array)
  * 动态规划(dynamic programming)
