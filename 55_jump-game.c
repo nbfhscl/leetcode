@@ -31,10 +31,21 @@ bool canJump(int* nums, int numsSize){
     return true;
 }
 
+bool canJump_2(int* nums, int numsSize){
+    int end = 0;
+    for (int i=0; i<numsSize && i<=end; i++) {
+        end = MAX(end, i+nums[i]);
+        if (end >= numsSize-1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int main() {
-    /* int nums[5] = {2,3,1,1,4}; */
-    int nums[5] = {3,2,1,0,4};
-    bool bl = canJump(nums, sizeof(nums)/sizeof(int));
+    int nums[5] = {2,3,1,1,4};
+    /* int nums[5] = {3,2,1,0,4}; */
+    bool bl = canJump_2(nums, sizeof(nums)/sizeof(int));
     printf("%d\n", bl);
 }
 
