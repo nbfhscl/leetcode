@@ -3,6 +3,9 @@
 #include <stdio.h>
 
 /*
+ *
+ * Count smaller elements on right
+ * 
  * Constrains
  * 1. numsSize? [1, 100000]
  * 2. nums[i]? [-10000, 10000]
@@ -62,6 +65,10 @@
 /*    return res;*/
 /*}*/
 
+/**
+ * index[i]: index of ith ele in original array. because the original array
+ * never changed 
+ */
 void merge_sort_count(int* a, int l, int r, int* res, int* index) {
     if (l >= r) return;
     int m = l + ((r-l)>>1);
@@ -70,19 +77,27 @@ void merge_sort_count(int* a, int l, int r, int* res, int* index) {
     int tmp[r-l+1], i1=l, i2=m+1, j=0;
     for (;i1<=m && i2<=r;) {
         if (a[index[i1]] > a[index[i2]]) {
+            // sort from large to small
             tmp[j++] = index[i1];
+            // rest of right part is smaller 
             res[index[i1]] += r-i2+1;
+            // i1 is taken
             i1++;
         } else {
+            // i2 is taken
+            // no reverse order pair found
             tmp[j++] = index[i2++];
         }
     }
+    // take the rest if any
     for (;i1<=m;) {
         tmp[j++] = index[i1++];
     }
+    // take the rest if any
     for (;i2<=r;) {
         tmp[j++] = index[i2++];
     }
+    // refresh the index array for next round merge
     for (int i=0; i<j; i++) {
         index[l+i] = tmp[i];
     }
