@@ -64,7 +64,6 @@ int dp(int m, int n, int** map) {
     map[m][n] = dp(m-1,n,map) + dp(m,n-1,map);
     return map[m][n];
 }
-
 int uniquePaths_dp(int m, int n) {
     int** map = malloc(sizeof(int*)*m);
     for (int i=0; i<m; i++) {
@@ -82,12 +81,12 @@ void dfs(int m, int n, int* path) {
     if (m>0) dfs(m-1,n,path);
     if (n>0) dfs(m,n-1,path);
 }
-
 int uniquePaths_dfs(int m, int n){
     int path = 0;
     dfs(m-1, n-1, &path);
     return path;
 }
+
 int uniquePaths(int m, int n){
     return uniquePaths_dp(m,n);
 }

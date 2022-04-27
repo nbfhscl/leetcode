@@ -34,7 +34,7 @@ void dfs(int* a, int aSize, int target, int cur, int* path, int pathIndex, int**
     }
     for (int i=cur;i<aSize;i++) {
         if (target<0 && a[i]>=0) {
-            continue;
+            break;
         }
         //如果有负数的话怎么剪枝叶？
         path[pathIndex] = a[i];

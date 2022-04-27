@@ -17,7 +17,7 @@
  *
  * Test Cases
  * 1. [0,   1,    0,    2,    1,    0,    1,    3,    2,    1,    2,    1] => 6
- *    [0,0],[0,3],[1,3],[1,3],[2,3],[2,3],[2,3],[2,2],[3,2],[3,2],[3,1],[2,0] =>
+ *    [0,3],[0,3],[1,3],[1,3],[2,3],[2,3],[2,3],[2,2],[3,2],[3,2],[3,1],[3,0] =>
  *    0+    0+    1+    0+    1+    2+    1+    0+    0+    1+    0+    0 = 6
  *
  * 2. [4,2,0,3,2,5] => 9
@@ -25,7 +25,7 @@
  *
  * Ideas and Complexities
  * maxLeftHeight[i] = max(maxLeftHeight[i-1], height[i])
- * maxRightHeight[i] = max(maxRightHeight[i-1], height[i])
+ * maxRightHeight[i] = max(maxRightHeight[i+1], height[i])
  * max[i] = max(min(maxLeft[i],maxRight[i])-height[i], 0)
  *
  * Ideas and Complexities
@@ -80,14 +80,14 @@ int trap(int* height, int heightSize){
 int trap_double_pointer(int* height, int heightSize) {
     int maxLeft = 0, maxRight = 0, sum = 0, l = 0, r = heightSize-1;
     for (;l<=r;) {
+        // no need to maintain two array for maxLeft and maxRight
+        // instead two var is enough
         if (maxLeft <= maxRight) {
             sum += max(0, maxLeft-height[l]);
-            /* if (height[l] > maxLeft) maxLeft = height[l]; */
             maxLeft = max(maxLeft, height[l]);
             l++;
         } else {
             sum += max(0, maxRight-height[r]);
-            /* if (height[r] > maxRight) maxRight = height[r]; */
             maxRight = max(maxRight, height[r]);
             r--;
         }

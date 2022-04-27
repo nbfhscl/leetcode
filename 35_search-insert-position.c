@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <assert.h>
 
 /*
+ * review binary search special case need to handle
+ *
  * 简单(easy)
  * 数组(array)
  * 二分查找(binary search)
@@ -15,23 +18,25 @@
 
 
 int searchInsert(int* nums, int numsSize, int target){
-    int l, r, mid;
-    for (l=0,r=numsSize-1; l<=r;) {
-        mid = l + (r-l)/2;
-        if (target == nums[mid]) {
-            return mid;
-        } else if (target < nums[mid]) {
-            r = mid - 1;
+    int l = 0, r = numsSize-1, m;
+    for (; l<r;) {
+        m = l + ((r-l)>>1);
+        if (nums[m] == target) {
+            return m;
+        } else if (nums[m] < target) {
+            l = m + 1;
         } else {
-            l = mid + 1;
+            r = m;
         }
     }
+    if (l == numsSize-1 && nums[numsSize-1]<target) l++;
     return l;
 }
 
 int main() {
     /* int nums[5] = {0,1,3,4,5}, target = 2; */
-    int nums[5] = {0,1,2,4,5}, target = 3;
-    printf("%d\n", searchInsert(nums, 5, target));
+    int nums[4] = {1, 3, 5, 6}, target = 7;
+    printf("%d\n",searchInsert(nums, sizeof(nums)/sizeof(int), target));
+    assert(searchInsert(nums, sizeof(nums)/sizeof(int), target) == 4);
 }
 

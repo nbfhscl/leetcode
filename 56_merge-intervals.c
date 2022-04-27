@@ -68,13 +68,16 @@ int** merge(int** intervals, int intervalsSize, int* intervalsColSize, int* retu
     int j=0;
     for (int i=1; i<intervalsSize; i++) {
         if (intervals[i][0] > intervals[j][1]) {
+            // store to j+1 if not overlapped
             j++;
             intervals[j][0] = intervals[i][0];
             intervals[j][1] = intervals[i][1];
         } else {
+            // merge to j if overlapped
             intervals[j][1] = MAX(intervals[j][1], intervals[i][1]);
         }
     }
+    // the final array size if j+1
     *returnSize = j+1;
     *returnColumnSizes = malloc(sizeof(int)*(*returnSize));
     for (int i=0; i<(*returnSize); i++) {

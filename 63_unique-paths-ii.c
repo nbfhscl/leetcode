@@ -19,7 +19,6 @@ int uniquePathsWithObstacles(int** obstacleGrid, int obstacleGridSize, int* obst
     for (int i=0; i<obstacleGridSize; i++) {
         map[i] = malloc(sizeof(int)*obstacleGridColSize[i]);
     }
-    map[0][0] = obstacleGrid[0][0] == 1 ? 0 : 1;
     for (int i=0; i<obstacleGridSize; i++) {
         for (int j=0; j<obstacleGridColSize[i]; j++) {
             if (obstacleGrid[i][j] == 1) map[i][j] = 0;

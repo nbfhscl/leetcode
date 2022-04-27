@@ -31,6 +31,7 @@ void dfs(int *a, int aSize, int cur, int *path, int pathIndex, int **res, int
         return;
     }
     for (int i=cur; i<aSize; i++) {
+        // if a[i] == a[i-1], value a[i] is already been chosen in this pathIndex
         if (i>cur && a[i] == a[i-1]) continue;
         if (target<0 && a[i]>=0) return;
         path[pathIndex] = a[i];

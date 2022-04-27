@@ -18,20 +18,20 @@
 
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 
-bool canJump(int* nums, int numsSize){
-    int max=0, end=0, i;
-    for (i=0; i<numsSize; i++) {
-        max = MAX(max, i+nums[i]);
-        if (i==end) {
-            end = max;
-            if (max <= i) break;
-        }
-    }
-    if (i < numsSize -1) return false;
-    return true;
-}
+/* bool canJump(int* nums, int numsSize){ */
+/*     int max=0, end=0, i; */
+/*     for (i=0; i<numsSize; i++) { */
+/*         max = MAX(max, i+nums[i]); */
+/*         if (i==end) { */
+/*             end = max; */
+/*             if (max <= i) break; */
+/*         } */
+/*     } */
+/*     if (i < numsSize -1) return false; */
+/*     return true; */
+/* } */
 
-bool canJump_2(int* nums, int numsSize){
+bool canJump(int* nums, int numsSize){
     int end = 0;
     for (int i=0; i<numsSize && i<=end; i++) {
         end = MAX(end, i+nums[i]);
