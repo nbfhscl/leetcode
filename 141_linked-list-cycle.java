@@ -11,7 +11,7 @@ import java.lang.Integer;
  *     }
  * }
  */
-public class Solution {
+class Solution {
     public boolean hasCycle(ListNode head) {
         return hasCycle_cycle(head);
     }

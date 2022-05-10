@@ -13,7 +13,7 @@ public class TreeNode {
     }
     public static TreeNode getTree(List<Integer> nodes, int i) {
         if (nodes == null || nodes.isEmpty()) return null;
-        if (i > nodes.size()) return null;
+        if (i >= nodes.size()) return null;
         if (nodes.get(i) == null) return null;
         TreeNode node = new TreeNode(nodes.get(i).intValue());
         node.left = getTree(nodes, 2*i+1);

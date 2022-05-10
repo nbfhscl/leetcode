@@ -92,7 +92,7 @@ class Solution {
 
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(3, 9, 20, null, null, 15, 7);
-        Solution sl = new Solution();
+       Solution sl = new Solution();
         System.out.println(sl.zigzagLevelOrder(TreeNode.getTree(list, 0)));
     }
 }
