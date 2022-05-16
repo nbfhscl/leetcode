@@ -1,16 +1,15 @@
-import java.util.Arrays;
-
 /**
  * 给你一个链表数组，每个链表都已经按升序排列。
  * 请你将所有链表合并到一个升序链表中，返回合并后的链表。
  *
  * 困难(hard)
  * 1. 归并merge
- * 2. todo: 分治
- * 3. todo: 优先级队列，priority
+ * 2. todo: 分治. O(n*logk), O(1)
+ * 3. todo: 优先级队列，priority queue. O(n*logk), O(1)
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
+    // O(kn), O(1)
+    public ListNode mergeKLists_merge(ListNode[] lists) {
         ListNode ret = new ListNode();
         ListNode head = ret;
         for (;;) {
@@ -32,7 +31,7 @@ class Solution {
     }
     public static void main(String[] args) {
         Solution sl = new Solution();
-        assert sl.mergeKLists(new ListNode[]{
+        assert sl.mergeKLists_merge(new ListNode[]{
                 ListNode.getList(new int[]{3,4,9}),
                 ListNode.getList(new int[]{1,2,5})
         }).equals(ListNode.getList(new int[]{1,2,3,4,5,9}));
