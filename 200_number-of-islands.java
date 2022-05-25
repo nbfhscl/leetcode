@@ -13,7 +13,6 @@ import java.util.Set;
  *
  * Ideas and Complexities
  * 1. dfs
- * 2. bfs
  * 3. 并查集(joint search set)
  *
  * */
