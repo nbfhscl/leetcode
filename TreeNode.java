@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class TreeNode {
@@ -10,6 +11,9 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+    public static TreeNode from(Integer[] nodes, int i) {
+        return getTree(Arrays.asList(nodes), i);
     }
     public static TreeNode getTree(List<Integer> nodes, int i) {
         if (nodes == null || nodes.isEmpty()) return null;
