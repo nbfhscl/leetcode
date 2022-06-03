@@ -13,7 +13,7 @@
  */
 
 class Solution {
-    public String longestPalindrome(String s) {
+    public String longestPalindrome_center_expand(String s) {
         char[] cList = s.toCharArray();
         int len = cList.length;
         int rl=0, rr=0;
@@ -30,6 +30,35 @@ class Solution {
             }
         }
         return String.copyValueOf(cList, rl, rr-rl);
+    }
+
+    // todo:
+    public String longestPalindrome_manacher(String s) {
+        StringBuilder sb = new StringBuilder('#');
+        for (int i=0; i<s.length(); i++) {
+            sb.append(s.charAt(i));
+            sb.append('#');
+        }
+        sb.append('#');
+        char[] cs = sb.toString().toCharArray();
+        int len = cs.length;
+        int[] arms = new int[len];
+        for (int m=0,l=0,r=0,j=0;m<len;m++) {
+            int arm=0;
+            if ((j + arms[j]) > m) {
+                arm = Math.min(j+arms[j]-m, arms[2*j-m]);
+            }
+            l = m-arm+1; r=m+arm;
+            for (;l>0 && r<len && cs[l-1] == cs[r];l--,r++);
+            if (r > j) {
+                j = r;
+            }
+        }
+        return String.copyValueOf(cs, rl, rr-rl);
+    }
+
+    public String longestPalindrome(String s) {
+        return longestPalindrome_manacher(s);
     }
     public static void main (String[] args) {
         Solution sl = new Solution();
